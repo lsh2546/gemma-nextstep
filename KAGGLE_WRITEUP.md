@@ -102,9 +102,9 @@ Our core principle is:
 > Do not just translate the document. Complete the next step—and show the
 > evidence.
 
-**Public code:** `[PUBLIC GITHUB URL]`
+**Public code:** `https://github.com/lsh2546/gemma-nextstep`
 
-**Live UX demo:** `[PUBLIC STATIC SPACE URL]`
+**Live UX demo:** `https://huggingface.co/spaces/lsh2546/gemma-nextstep`
 
 **Reproducible Gemma 4 notebook:** `[PUBLIC KAGGLE NOTEBOOK URL]`
 
