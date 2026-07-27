@@ -106,5 +106,3 @@ Our core principle is:
 
 **Live UX demo:** `https://huggingface.co/spaces/lsh2546/gemma-nextstep`
 
-**Reproducible Gemma 4 notebook:** `[PUBLIC KAGGLE NOTEBOOK URL]`
-
