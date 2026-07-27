@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NextStep — Official Documents into Action</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="brand">NextStep</div>
+      <div class="subtitle">Turning Official Documents into Action with Gemma 4</div>
+    </div>
+    <div class="status"><span class="dot"></span> Local-ready demo</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel input-panel">
+      <p class="eyebrow">DOCUMENT INPUT</p>
+      <h1>Don’t just translate the document.<br/>Complete the next step.</h1>
+      <p class="lead">Upload a Korean school notice and ask what to do in English or Vietnamese.</p>
+
+      <label class="upload" for="fileInput">
+        <input id="fileInput" type="file" accept="image/*,.pdf" />
+        <span class="upload-title">Upload official notice</span>
+        <span class="upload-sub">Image or PDF · demo uses a sample workflow</span>
+      </label>
+      <div id="fileName" class="file-name">No document selected</div>
+
+      <div class="field-row">
+        <label>
+          Response language
+          <select id="language">
+            <option value="en">English</option>
+            <option value="vi">Tiếng Việt</option>
+          </select>
+        </label>
+      </div>
+
+      <label>
+        Ask a question
+        <textarea id="question" rows="3" placeholder="What do I need to prepare and when is it due?"></textarea>
+      </label>
+
+      <button id="analyzeBtn" class="primary">Analyze with NextStep</button>
+
+      <div class="privacy-note">
+        <strong>Hosted demo notice</strong>
+        <span>This prototype uses a simulated sample pipeline. Local Gemma 4 integration is prepared as a separate adapter.</span>
+      </div>
+    </section>
+
+    <section class="panel output-panel">
+      <div id="emptyState" class="empty-state">
+        <div class="empty-icon">→</div>
+        <h2>Your next actions will appear here</h2>
+        <p>Upload a notice and run the sample analysis.</p>
+      </div>
+
+      <div id="results" class="hidden">
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">NEXT STEP</p>
+            <h2 id="resultTitle">You only need to do 3 things.</h2>
+          </div>
+          <span class="confidence">Evidence linked</span>
+        </div>
+
+        <div id="actions" class="actions"></div>
+
+        <div class="section-title">YOU NEED</div>
+        <div id="needs" class="needs"></div>
+
+        <div class="section-title">READY ACTIONS</div>
+        <div class="button-grid">
+          <button id="calendarBtn">Add to Calendar</button>
+          <button id="checklistBtn">Save Checklist</button>
+          <button id="helpBtn">Create Help Card</button>
+        </div>
+
+        <div class="section-title">SOURCE EVIDENCE</div>
+        <div id="evidence" class="evidence"></div>
+
+        <details class="json-block">
+          <summary>Structured action JSON</summary>
+          <pre id="jsonOutput"></pre>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
+
