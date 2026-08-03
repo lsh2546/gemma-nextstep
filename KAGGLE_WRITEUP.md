@@ -31,6 +31,21 @@ host model weights.
 3. Open `gemma_app.py` in the repository to inspect the Gemma 4 image-to-JSON
    inference path and deterministic evidence-reference validation.
 
+### End-to-end verification
+
+We executed the full multimodal path on Kaggle using two NVIDIA T4 GPUs.
+Transformers 5.14.1 loaded the 16.0 GB `google/gemma-4-E4B-it` weights and
+`Gemma4Processor`, then processed a generated school-notice image. Gemma returned
+exactly three actions—guardian signature, required supplies, and form
+submission—with matching quotations and the August 3 deadline. JSON extraction
+and evidence-reference validation completed successfully.
+
+The test also revealed realistic schema drift: Gemma returned numeric confidence
+values and a natural-language deadline. We strengthened the deterministic layer
+to normalize evidence-backed confidence and clear non-ISO deadlines instead of
+guessing. This is why validation is a core part of NextStep rather than a UI
+detail.
+
 ## Gemma 4 implementation
 
 The submission application uses `google/gemma-4-E4B-it`. The uploaded document
