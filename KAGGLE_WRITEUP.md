@@ -14,6 +14,23 @@ actions. Each action is linked to an exact quotation from the source document.
 The user can ask a question in plain language, choose English or Vietnamese, and
 receive required items, a deadline, confidence labels, and structured JSON.
 
+> **You only need to do 3 things.**
+
+That sentence is the product contract: NextStep limits cognitive load while
+keeping every recommendation inspectable. The public Static Space demonstrates
+the complete interaction workflow without requiring an account or model
+download. The reproducible Gemma 4 multimodal implementation is provided in the
+public GitHub repository because the free Static Space cannot execute Python or
+host model weights.
+
+### What judges can verify in 60 seconds
+
+1. Open the public Space and select **Analyze with NextStep**.
+2. Inspect the three actions, required items, Korean source quotations, and
+   structured JSON.
+3. Open `gemma_app.py` in the repository to inspect the Gemma 4 image-to-JSON
+   inference path and deterministic evidence-reference validation.
+
 ## Gemma 4 implementation
 
 The submission application uses `google/gemma-4-E4B-it`. The uploaded document
@@ -31,9 +48,11 @@ present, and every `evidence_id` used by an action must match an evidence object
 An unmatched action is downgraded to `uncertain` and a warning is added. This
 separates probabilistic document understanding from deterministic safeguards.
 
-The repository also contains a static UX preview using validated sample output.
-It is clearly separated from the Gemma-powered Gradio application and is not
-presented as live model inference.
+Gemma 4 is not a decorative chatbot layer. Its output schema is the contract
+that drives the action cards and the calendar, checklist, and redacted help-card
+tools. The repository also contains a static UX preview using validated sample
+output. It is clearly separated from the Gemma-powered Gradio application and
+is not presented as live model inference.
 
 ## Representative scenario
 
@@ -101,6 +120,8 @@ Our core principle is:
 
 > Do not just translate the document. Complete the next step—and show the
 > evidence.
+
+Future versions will strengthen privacy with local Gemma 4 (E4B/E2B) inference.
 
 **Public code:** `https://github.com/lsh2546/gemma-nextstep`
 
