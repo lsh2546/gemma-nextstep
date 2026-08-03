@@ -59,13 +59,35 @@ def extract_json(text):
     missing = required.difference(result)
     if missing:
         raise ValueError(f"Missing required fields: {sorted(missing)}")
+    warnings = result.setdefault("warnings", [])
+    if len(result["actions"]) > 3:
+        result["actions"] = result["actions"][:3]
+        warnings.append("Gemma returned more than three actions; extra actions were removed.")
     evidence_ids = {item["id"] for item in result["evidence"]}
     for action in result["actions"]:
         if action.get("evidence_id") not in evidence_ids:
             action["confidence"] = "uncertain"
-            result.setdefault("warnings", []).append(
+            warnings.append(
                 f"{action.get('title', 'Action')} has no matching evidence."
             )
+        elif action.get("confidence") not in {
+            "confirmed_from_document",
+            "uncertain",
+        }:
+            action["confidence"] = "confirmed_from_document"
+            warnings.append(
+                f"{action.get('title', 'Action')} had a non-schema confidence value; "
+                "it was normalized after evidence validation."
+            )
+    deadline = result.get("deadline")
+    if deadline is not None and not re.fullmatch(
+        r"\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})?)?",
+        str(deadline),
+    ):
+        result["deadline"] = None
+        warnings.append(
+            "Gemma returned a non-ISO deadline; it was cleared instead of guessed."
+        )
     return result
 
 
