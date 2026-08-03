@@ -30,6 +30,21 @@ account or model download. The Python implementation is kept in the public
 repository because a free Static Space cannot execute Python or host Gemma 4
 weights.
 
+## Verified Gemma 4 inference
+
+The multimodal path was executed end to end on Kaggle with two NVIDIA T4 GPUs:
+
+- `google/gemma-4-E4B-it` (16.0 GB weights)
+- Transformers 5.14.1 and `Gemma4Processor`
+- Generated document image passed through `apply_chat_template`
+- Three grounded actions, needs, evidence quotations, and deadline returned
+- JSON extraction and evidence-reference validation passed
+
+The run also exposed two real schema deviations—numeric confidence and a
+natural-language deadline. The application now normalizes evidence-backed
+confidence values and clears non-ISO deadlines rather than guessing. See
+[`VERIFICATION.md`](VERIFICATION.md) for the run record and output excerpt.
+
 ## Current prototype
 
 This repository contains a fully working static vertical slice for the representative scenario:
